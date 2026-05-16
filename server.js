@@ -5,10 +5,10 @@ import Fastify from "fastify";
 import authRoutes from "./auth/router.js"; // 👈 নতুন Auth রাউটার ইম্পোর্ট
 import configPlugin from "./core/config.js";
 import databasePlugin from "./core/database.js"; // ডেটাবেস প্লাগিন ইম্পোর্ট
+import errorHandlerPlugin from "./core/errorHandler.js";
 import securityPlugin from "./core/security.js";
 import viewPlugin from "./core/view.js";
 import userRoutes from "./user/router.js";
-
 const app = Fastify({
   logger: true,
 });
@@ -21,6 +21,8 @@ const start = async () => {
     await app.register(viewPlugin);
     await app.register(configPlugin);
     await app.register(databasePlugin); // ডেটাবেস প্লাগিন রেজিস্টার
+    // 👈 এরর হ্যান্ডলার প্লাগিন রেজিস্টার (এটি অন্য রাউটগুলোর আগে হওয়া ভালো)
+    await app.register(errorHandlerPlugin);
     // ডোমেইন রাউটারগুলো লোড করছি
     // prefix: '/api/users' দেওয়ার মানে হলো, এই রাউটারের ভেতরের সব রাউটের
     // আগে স্বয়ংক্রিয়ভাবে /api/users যুক্ত হয়ে যাবে। (যেমন: POST /api/users/)
