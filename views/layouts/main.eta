@@ -1,0 +1,45 @@
+<!-- views/layouts/main.eta -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= it.title || 'FastifyEta Architecture' %></title>
+    
+    <!-- আমাদের Tailwind CSS ফাইল (core/view.js এর স্ট্যাটিক সার্ভার থেকে আসছে) -->
+    <link href="/public/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased min-h-screen">
+    
+<!-- views/layouts/main.eta (Navigation Bar আপডেট) -->
+    <nav class="bg-indigo-600 text-white p-4 shadow-md">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-wider">FastifyEta🚀</h1>
+            
+            <div class="flex items-center space-x-4">
+                <!-- যদি currentUser থাকে (অর্থাৎ লগিন করা), তবেই নাম ও লগআউট বাটন দেখাবে -->
+                <% if (it.currentUser) { %>
+                    <span class="text-sm font-medium bg-indigo-500 px-3 py-1 rounded-full">
+                        👋 Hello, <%= it.currentUser.name %>
+                    </span>
+                    <a href="/auth/logout" class="text-sm font-semibold hover:text-indigo-200 transition-colors">
+                        Logout
+                    </a>
+                <% } else { %>
+                    <span class="text-sm bg-indigo-500 px-3 py-1 rounded-full"><%= it.title %></span>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+
+    <!-- মূল কনটেন্ট রেন্ডার হওয়ার জায়গা -->
+    <main class="max-w-4xl mx-auto p-6 mt-8">
+        <%~ it.body %>
+    </main>
+
+    <!-- ফুটার -->
+    <footer class="text-center text-gray-500 text-sm mt-12 pb-6">
+        &copy; 2026 Modular Monolith Architecture
+    </footer>
+</body>
+</html>

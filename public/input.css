@@ -1,0 +1,8 @@
+/* public/input.css */
+@import "tailwindcss";
+
+/* 
+  @source এর মাধ্যমে আমরা Tailwind কে বলছি: 
+  "public ফোল্ডারের এক ধাপ পেছনে গিয়ে views ফোল্ডারের ভেতরের সব ফাইল স্ক্যান করো" 
+*/
+@source "../views";
